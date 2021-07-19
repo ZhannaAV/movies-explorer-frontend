@@ -5,6 +5,7 @@
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 }
 
 .header_place_about-project{

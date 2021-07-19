@@ -11,6 +11,12 @@ function Header() {
                 <img className='header__logo' src={Logo} alt='логотип'/>
             </Link>
             <div className="header__sign-block">
+                <Link to='signup'>
+                    <button>Регистрация</button>
+                </Link>
+                <Link to='signin'>
+                    <button>Войти</button>
+                </Link>
             </div>
         </header>
     )

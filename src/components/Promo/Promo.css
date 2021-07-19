@@ -26,6 +26,7 @@
 	font-size: 50px;
 	line-height: 58px;
 	font-weight: 400;
+	max-width: 610px;
 }
 
 .promo__text{
@@ -41,7 +42,7 @@
 	padding: 10px 0;
 	text-align: center;
 	background-color: transparent;
-	max-width: 129px;
+	width: 129px;
 	opacity: 0.6;
 	border: 1px solid #000;
 	color: #000;
@@ -51,4 +52,5 @@
 	font-size: 12px;
 	line-height: 16px;
 	font-family: 'Inter', sans-serif;
+	cursor: pointer;
 }
