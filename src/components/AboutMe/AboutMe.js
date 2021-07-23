@@ -1,12 +1,11 @@
 import './AboutMe.css'
-import {Link} from 'react-router-dom'
-import Title from "../Title/Title";
 import Foto from "../../images/pic__COLOR_pic.jpg";
+import NavTab from "../NavTab/NavTab";
 
 function AboutMe() {
     return (
         <section className="about-me">
-            <Title title='Студент'/>
+            <NavTab title='Студент'/>
             <div className="about-me__info-block">
                 <img src={Foto} alt="фото" className="about-me__img"/>
                 <div className="about-me__info">
@@ -19,15 +18,13 @@ function AboutMe() {
                         веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной
                         работы.</p>
                     <ul className="about-me__links">
-                        <Link className="about-me__link">Facebook</Link>
-                        <Link className="about-me__link">Github</Link>
+                        <a href='https://ru-ru.facebook.com/' target='_blank'
+                           className="about-me__link">Facebook</a>
+                        <a href='https://github.com' className="about-me__link">Github</a>
                     </ul>
-
                 </div>
             </div>
         </section>
-
-
     )
 }
 

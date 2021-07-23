@@ -1,10 +1,10 @@
 import './AboutProject.css'
-import Title from "../Title/Title";
+import NavTab from "../NavTab/NavTab";
 
 function AboutProject() {
     return (
         <section className="about-project">
-            <Title title='О проекте'/>
+            <NavTab title='О проекте'/>
             <ul className="about-project__list">
                 <li className="about-project__item">
                     <h3 className="about-project__item-title">Дипломный проект включал 5 этапов</h3>

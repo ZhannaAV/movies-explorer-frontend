@@ -1,10 +1,10 @@
 import './Techs.css'
-import Title from "../Title/Title";
+import NavTab from "../NavTab/NavTab";
 
 function Techs() {
     return (
         <section className="techs">
-            <Title title='Технологии'/>
+            <NavTab title='Технологии'/>
             <h3 className="techs__title">7 технологий</h3>
             <p className="techs__text">На курсе веб-разработки мы освоили технологии, которые
                 применили в дипломном проекте.</p>

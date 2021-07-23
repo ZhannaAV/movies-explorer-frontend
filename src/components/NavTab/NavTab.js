@@ -1,6 +1,6 @@
-import './Title.css'
+import './NavTab.css'
 
-function Title({title}) {
+function NavTab({title}) {
     return (
         <>
             <h2 className="title">{title}</h2>
@@ -9,4 +9,4 @@ function Title({title}) {
     )
 }
 
-export default Title
+export default NavTab
