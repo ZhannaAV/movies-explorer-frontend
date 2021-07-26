@@ -1,0 +1,79 @@
+.navigation{
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	width: 100%;
+	box-sizing: border-box;
+	padding-left: 44px;
+}
+
+.navigation__link-signup{
+	text-decoration: none;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 16px;
+	color: #000;
+	margin-right: 30px;
+	margin-left: auto;
+}
+
+.navigation__link-signin{
+	text-decoration: none;
+}
+
+.navigation__signin-btn{
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 16px;
+	background-color: #000;
+	color: #FFF;
+	width: 76px;
+	height: 32px;
+	text-align: center;
+	border: none;
+	font-family: 'Inter', sans-serif;
+}
+
+.navigation__link-film{
+	font-size: 13px;
+	line-height: 18px;
+	font-weight: 400;
+	text-decoration: none;
+	color: #000;
+}
+
+.navigation__link-film + .navigation__link-film{
+	margin-left: 16px;
+}
+
+.navigation__link-film_weight_semi-bold{
+	font-weight: 500;
+}
+
+.navigation__link-profile{
+	display: flex;
+	width: 100px;
+	height: 32px;
+	text-decoration: none;
+	background: #FFFFFF;
+	color: #000;
+	box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+	border-radius: 40px;
+	justify-content: center;
+	align-items: center;
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 12px;
+	margin-left: auto;
+}
+
+.profile-icon{
+	width: 26px;
+	height: 26px;
+	border-radius: 50%;
+	background-color: #F9F9F9;
+	background-image: url("../../images/account.svg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	margin-left: 7px;
+}

@@ -1,6 +1,7 @@
 import './Header.css'
 import {Link, useLocation} from 'react-router-dom'
 import Logo from '../../images/logo.svg'
+import Navigation from "../Navigation/Navigation";
 
 function Header() {
     const {pathname} = useLocation()
@@ -10,16 +11,7 @@ function Header() {
             <Link to='/'>
                 <img className='header__logo' src={Logo} alt='логотип'/>
             </Link>
-            <div className="header__sign-block">
-                <Link className='header__link-signup' to='/signup'>
-                    Регистрация
-                </Link>
-                <Link className='header__link-signin' to='/signin'>
-                    <button className="header__signin-btn">
-                        Войти
-                    </button>
-                </Link>
-            </div>
+            <Navigation/>
         </header>
     )
 }

@@ -23,6 +23,7 @@
 	font-size: 12px;
 	line-height: 15px;
 	font-family: 'Inter', sans-serif;
+	cursor: pointer;
 }
 
 .film__load-btn_hidden{

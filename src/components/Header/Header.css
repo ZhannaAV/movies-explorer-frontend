@@ -5,7 +5,6 @@
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
 }
 
 .header_place_about-project{
@@ -18,33 +17,3 @@
 	object-fit: cover;
 }
 
-.header__sign-block{
-	display: flex;
-	align-items: baseline;
-}
-
-.header__link-signup{
-	text-decoration: none;
-	font-weight: 500;
-	font-size: 12px;
-	line-height: 16px;
-	color: #000;
-	margin-right: 30px;
-}
-
-.header__link-signin{
-	text-decoration: none;
-}
-
-.header__signin-btn{
-	font-weight: 500;
-	font-size: 12px;
-	line-height: 16px;
-	background-color: #000;
-	color: #FFF;
-	width: 76px;
-	height: 32px;
-	text-align: center;
-	border: none;
-	font-family: 'Inter', sans-serif;
-}

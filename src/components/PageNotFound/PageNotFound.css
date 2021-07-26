@@ -1,0 +1,30 @@
+.not-found{
+	padding-top: 246px;
+	padding-bottom: 60px;
+	box-sizing: border-box;
+	text-align: center;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.not-found__title{
+	font-size: 140px;
+	line-height: 169px;
+	font-weight: 400;
+	margin: 0;
+}
+
+.not-found__subtitle{
+	margin-top: 5px;
+	margin-bottom: 0;
+}
+
+.not-found__link{
+	font-size: 14px;
+	line-height: 17px;
+	font-weight: 400;
+	text-decoration: none;
+	color: #000;
+	margin-top: auto;
+}

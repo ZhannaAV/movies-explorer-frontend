@@ -1,13 +1,13 @@
 import './App.css';
 import React from 'react';
-import {Route, Switch, useLocation} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import Main from "../Main/Main";
-import Footer from "../Footer/Footer";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
+import PageNotFound from "../PageNotFound/PageNotFound";
 
 function App() {
     return (
@@ -16,20 +16,23 @@ function App() {
                 <Route exact path='/'>
                     <Main/>
                 </Route>
-                <Route path='/signup'>
+                <Route exact path='/signup'>
                     <Register/>
                 </Route>
-                <Route path='/signin'>
+                <Route exact path='/signin'>
                     <Login/>
                 </Route>
-                <Route path='/profile'>
+                <Route exact path='/profile'>
                     <Profile/>
                 </Route>
-                <Route path='/movies'>
+                <Route exact path='/movies'>
                     <Movies/>
                 </Route>
-                <Route path='/saved-movies'>
+                <Route exact path='/saved-movies'>
                     <SavedMovies/>
+                </Route>
+                <Route path='/*'>
+                    <PageNotFound/>
                 </Route>
             </Switch>
         </div>
