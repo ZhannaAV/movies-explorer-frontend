@@ -1,10 +1,10 @@
-.about-project{
+.about-project {
 	height: 100vh;
-	padding: 110px 70px;
+	padding: 110px 70px 90px;
 	box-sizing: border-box;
 }
 
-.about-project__list{
+.about-project__list {
 	padding-left: 0;
 	margin: 70px 0 0;
 	display: flex;
@@ -12,11 +12,11 @@
 	list-style: none;
 }
 
-.about-project__item + .about-project__item{
+.about-project__item + .about-project__item {
 	margin-left: 40px;
 }
 
-.about-project__item-title{
+.about-project__item-title {
 	margin: 0;
 	font-size: 20px;
 	line-height: 24px;
@@ -24,14 +24,14 @@
 	font-weight: 400;
 }
 
-.about-project__item-text{
+.about-project__item-text {
 	margin: 26px 0 0;
 	font-size: 14px;
 	line-height: 20px;
 	font-weight: 400;
 }
 
-.about-project__table{
+.about-project__table {
 	margin-top: 93px;
 	display: grid;
 	grid-template-columns: 228px 1fr;
@@ -40,23 +40,85 @@
 
 }
 
-.about-project__block{
+.about-project__block {
 	height: 36px;
 	background-color: #F2F2F2;
 	padding-top: 9px;
 	box-sizing: border-box;
 }
 
-.about-project__block_color_black{
+.about-project__block_color_black {
 	color: #FFF;
 	background-color: #000;
 }
 
-.about-project__capture{
+.about-project__capture {
 	padding-top: 14px;
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 17px;
 	color: #A0A0A0;
+}
+
+@media screen and (max-width: 768px) {
+	.about-project {
+		padding: 90px 50px;
+		min-height: 585px;
+		height: 100%;
+	}
+
+	.about-project__item + .about-project__item {
+		margin-left: 30px;
+	}
+
+	.about-project__item-text {
+		font-size: 12px;
+		line-height: 18px;
+		margin-top: 22px;
+	}
+}
+
+@media screen and (max-width: 580px) {
+	.about-project {
+		min-height: 641px;
+		padding: 70px 18px 93px;
+	}
+
+	.about-project__list {
+		display: block;
+		margin-top: 60px;
+	}
+
+	.about-project__item + .about-project__item {
+		margin-left: 0;
+		margin-top: 56px;
+	}
+
+	.about-project__item-title {
+		font-size: 18px;
+		line-height: 22px;
+	}
+
+	.about-project__item-text {
+		font-size: 11px;
+		line-height: 16px;
+		margin-top: 16px;
+	}
+
+	.about-project__table {
+		margin-top: 60px;
+		grid-template-columns: 100px 1fr;
+	}
+
+	.about-project__block {
+		font-size: 11px;
+		line-height: 13px;
+	}
+
+	.about-project__capture {
+		padding-top: 10px;
+		font-size: 11px;
+		line-height: 13px;
+	}
 }
 

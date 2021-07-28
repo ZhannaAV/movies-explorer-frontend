@@ -29,7 +29,7 @@ function Navigation() {
                     <Link className='navigation__link-film' to='/signup'>
                         Сохранённые фильмы
                     </Link>
-                    <Link className='navigation__link-profile' to='/signin'>
+                    <Link className='navigation__link-profile' to='/profile'>
                         Аккаунт
                         <div className="profile-icon"/>
                     </Link>

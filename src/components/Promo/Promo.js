@@ -7,7 +7,7 @@ function Promo() {
         <section className="promo">
             <img src={Globus} alt="глобус, выложенный словом web" className="promo__img"/>
             <div className="promo__info">
-                <h1 className="promo__title">Учебный проект студента факультета <br/>Веб-разработки.
+                <h1 className="promo__title">Учебный проект студента факультета <span className='promo__title-word'>Веб-разработки.</span>
                 </h1>
                 <p className="promo__text">Листайте ниже, чтобы узнать больше про этот проект и его
                     создателя.</p>
