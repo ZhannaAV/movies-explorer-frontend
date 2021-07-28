@@ -55,3 +55,13 @@
 	margin: 0 0 0 12px;
 }
 
+@media screen and (max-width: 425px){
+.filter-checkbox{
+	padding: 44px 0;
+}
+	.filter-checkbox__name {
+		font-size: 11px;
+		margin-left: 13px;
+	}
+}
+
