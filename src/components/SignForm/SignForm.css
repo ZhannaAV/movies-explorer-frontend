@@ -49,3 +49,31 @@
 	text-decoration: none;
 	color: #000;
 }
+
+@media screen and (max-width: 768px){
+	.sign{
+		padding-bottom: 232px;
+		min-height: 475px;
+	}
+}
+
+@media screen and (max-width: 425px){
+	.sign{
+		padding-bottom: 30px;
+		padding-left: 30px;
+		padding-right: 30px;
+		min-height: 475px;
+	}
+	.sign__form{
+		margin-top: 80px;
+	}
+	.sign__button{
+		font-size: 12px;
+		line-height: 15px;
+	}
+	.sign__text{
+		font-size: 12px;
+		line-height: 15px;
+		margin-top: 14px;
+	}
+}
