@@ -18,7 +18,7 @@ function Header() {
 
     return (
         <header className={`header ${headerStyle}`}>
-            <Link className='header__logo-link' to='/'>
+            <Link to='/'>
                 <img className='header__logo' src={Logo} alt='логотип'/>
             </Link>
             <Navigation/>

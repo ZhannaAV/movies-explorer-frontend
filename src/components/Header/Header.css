@@ -28,8 +28,7 @@
 	padding: 0 30px;
 }
 	.header_place_sign{
-		padding-top: 232px;
-		padding-bottom: 40px;
+		padding: 232px 0 40px;
 	}
 }
 
@@ -40,9 +39,8 @@
 	.header_place_sign{
 		padding-top: 56px;
 		padding-bottom: 50px;
+		justify-content: center;
 	}
-	.header__logo-link{
-		margin: auto;
-	}
+
 }
 
