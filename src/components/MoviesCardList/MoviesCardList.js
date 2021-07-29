@@ -6,7 +6,7 @@ function MoviesCardList ({isSaved, films}) {
         <div className='film'>
             <ul className='films__list'>
                 {films.map(item =>{
-                    return <MoviesCard key={item}/>
+                    return <MoviesCard key={item} num={item} isSaved={isSaved}/>
                 })}
             </ul>
             <button className={`film__load-btn ${isSaved && "film__load-btn_hidden"}`}>Ещё</button>

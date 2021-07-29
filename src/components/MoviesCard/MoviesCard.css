@@ -32,6 +32,7 @@
 	text-overflow: ellipsis;
 }
 
+
 .film__btn-like{
 	background: #F9F9F9;
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.09);
@@ -40,10 +41,19 @@
 	border: 2px solid #fff;
 	box-sizing: border-box;
 	border-radius: 50%;
+	cursor: pointer;
 }
 
 .film__btn-like_checked{
 	background: #2BE080;
+}
+
+.film__btn-like_remove{
+	background: url("../../images/exit.svg") center center no-repeat;
+	border: none;
+	width: 10px;
+	height: 10px;
+	cursor: pointer;
 }
 
 .film__duration{
