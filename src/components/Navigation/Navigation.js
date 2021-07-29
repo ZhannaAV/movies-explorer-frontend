@@ -25,14 +25,14 @@ function Navigation() {
             {whiteList.some((i) => i === pathname) && (
                 <>
                     <nav className="navigation navigation_hidden">
-                        <Link
-                            className='navigation__link-film navigation__link-film_weight_semi-bold'
-                            to='/signup'>
+                        <NavLink
+                            className='navigation__link-film' activeClassName='navigation__link-film_weight_semi-bold'
+                            to='/movies'>
                             Фильмы
-                        </Link>
-                        <Link className='navigation__link-film' to='/signup'>
+                        </NavLink>
+                        <NavLink className='navigation__link-film' activeClassName='navigation__link-film_weight_semi-bold' to='/saved-movies'>
                             Сохранённые фильмы
-                        </Link>
+                        </NavLink>
                         <Link className='navigation__link-profile link-profile' to='/profile'>
                             Аккаунт
                             <div className="profile-icon"/>

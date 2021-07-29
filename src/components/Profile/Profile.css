@@ -67,6 +67,11 @@
 	cursor: pointer;
 }
 
+.profile__btn:hover{
+	opacity: .8;
+}
+
+
 .profile__btn_style_red{
 	color: #FF4062;
 }

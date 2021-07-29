@@ -60,6 +60,10 @@
 	cursor: pointer;
 }
 
+.promo__button:hover{
+	opacity: 0.8;
+}
+
 @media screen and (max-width: 1000px) {
 	.promo {
 		flex-direction: column;

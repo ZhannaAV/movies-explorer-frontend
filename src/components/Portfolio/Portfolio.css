@@ -1,5 +1,5 @@
 .portfolio {
-	padding: 10px 70px 125px;
+	padding: 100px 70px 125px;
 	box-sizing: border-box;
 }
 
@@ -32,6 +32,10 @@
 	line-height: 50px;
 	font-weight: 400;
 	letter-spacing: -0.04em;
+}
+
+.portfolio__project-link:hover{
+	opacity: .7;
 }
 
 .portfolio__link-img {

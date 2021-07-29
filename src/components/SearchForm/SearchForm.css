@@ -31,6 +31,10 @@
 	font-family: 'Inter', sans-serif;
 }
 
+.search-form__btn:hover{
+	opacity: 0.8;
+}
+
 @media screen and (max-width: 425px){
 .search-form{
 	padding: 0 4px;
