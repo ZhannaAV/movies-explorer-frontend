@@ -35,7 +35,8 @@
 	height: 32px;
 	text-align: center;
 	border: none;
-	font-family: 'Inter', sans-serif;
+	border-radius: 3px;
+	font-family: 'Inter', Arial, sans-serif;
 }
 
 .navigation__signin-btn:hover{

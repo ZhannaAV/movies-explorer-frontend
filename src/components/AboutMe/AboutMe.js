@@ -18,7 +18,7 @@ function AboutMe() {
                         веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной
                         работы.</p>
                     <ul className="about-me__links">
-                        <a href='https://ru-ru.facebook.com/' target='_blank'
+                        <a href='https://ru-ru.facebook.com/' target='_blank' rel="noreferrer"
                            className="about-me__link">Facebook</a>
                         <a href='https://github.com' className="about-me__link">Github</a>
                     </ul>

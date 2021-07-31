@@ -23,13 +23,20 @@
 	font-weight: 400;
 }
 
-.not-found__link {
+.not-found__back-btn {
+	border: none;
+	background: transparent;
 	font-size: 14px;
 	line-height: 17px;
 	font-weight: 400;
 	text-decoration: none;
 	color: #000;
 	margin-top: auto;
+	cursor: pointer;
+}
+
+.not-found__back-btn:hover{
+	opacity: .7;
 }
 
 @media screen and (max-width: 768px) {
@@ -55,7 +62,7 @@
 		line-height: 15px;
 	}
 
-	.not-found__link {
+	.not-found__back-btn {
 		font-size: 12px;
 		line-height: 15px;
 	}
