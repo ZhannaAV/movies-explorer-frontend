@@ -10,6 +10,8 @@ import Profile from "../Profile/Profile";
 import PageNotFound from "../PageNotFound/PageNotFound";
 
 function App() {
+    const [isLoader, setIsLoader] = React.useState(false);
+
     return (
         <div className="App">
             <Switch>
@@ -26,7 +28,7 @@ function App() {
                     <Profile/>
                 </Route>
                 <Route exact path='/movies'>
-                    <Movies/>
+                    <Movies isLoader={isLoader} setIsLoader={setIsLoader}/>
                 </Route>
                 <Route exact path='/saved-movies'>
                     <SavedMovies/>

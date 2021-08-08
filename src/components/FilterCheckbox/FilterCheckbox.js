@@ -1,7 +1,8 @@
 import React from "react";
 import './FilterCheckbox.css'
 
-function FilterCheckbox({title, isFilterOn, setFilter, setFilteredMovies, list}) {
+function FilterCheckbox({title, setFilteredMovies, list}) {
+    const [isFilterOn, setFilter] = React.useState( false)
 
     function applyFilter(list) {
         setFilteredMovies(list.filter(item => {
