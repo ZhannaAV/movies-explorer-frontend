@@ -23,7 +23,9 @@ function FilterCheckbox({title, setFilteredMovies, list}) {
 
 // обрабатывает список при переключении чекбокса
     React.useEffect(() => {
-        isFilterOn ? applyFilter(list) : cancelFilter(list)
+        if(list) {
+            isFilterOn ? applyFilter(list) : cancelFilter(list)
+        }
     }, [isFilterOn])
 
     return (

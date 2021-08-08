@@ -7,7 +7,6 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Preloader from "../Preloader/Preloader";
 import moviesApi from "../../utils/MoviesApi";
-import {emptySearchMessage, errorLoadMessage} from "../../utils/constants";
 
 function Movies({isLoader, setIsLoader}) {
     const [filteredMovies, setFilteredMovies] = React.useState(null);

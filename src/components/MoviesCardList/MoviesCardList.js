@@ -4,23 +4,54 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import {emptySearchMessage} from "../../utils/constants";
 
 function MoviesCardList({isSaved, movies, message, setMessage}) {
+    let [screenWidth, setScreenWidth] = React.useState(document.documentElement.clientWidth)
+    const [pul, setPul] = React.useState([0, 0])
+    const [currentElementNumber, setCurrentElementNumber] = React.useState(0)
+
+    window.addEventListener('resize', resize)
+
+    function resize() {
+        setScreenWidth(document.documentElement.clientWidth)
+    }
+
+    // setTimeout(resize, 3000)
+
+    React.useEffect(() => {
+        console.log(screenWidth)
+        if (screenWidth >= 1280) setPul([4, 3]);
+        if (screenWidth >= 990 && screenWidth < 1280) setPul([3, 3]);
+        if (screenWidth >= 630 && screenWidth < 990) setPul([2, 4]);
+        if (screenWidth < 630) setPul([5, 1]);
+    }, [screenWidth])
 
     React.useEffect(() => {
         if (!movies.length) setMessage(emptySearchMessage)
+        setCurrentElementNumber(pul[0] * pul[1])
     }, [movies])
+
+    React.useEffect(() => {
+        setCurrentElementNumber(pul[0] * pul[1])
+    }, [pul])
+
+    function handlePushElements() {
+        setCurrentElementNumber(currentElementNumber + pul[0])
+    }
 
     return (
         <>
             {movies.length ? (
                 <div className='film'>
                     <ul className='films__list'>
-                        {movies.map(item => {
-                            return <MoviesCard key={item.id} num={item.id} title={item.nameRU}
-                                               imageUrl={item.image.url} isSaved={isSaved}/>
+                        {movies.map((item, index) => {
+                           if (index < Math.max(currentElementNumber, (pul[0] * pul[1]))){
+                                return <MoviesCard key={item.id} num={item.id} title={item.nameRU}
+                                                   imageUrl={item.image.url} isSaved={isSaved}/>
+                            }
                         })}
                     </ul>
-                    <button className={`film__load-btn ${isSaved && "film__load-btn_hidden"}`}>Ещё
-                    </button>
+                    {movies[currentElementNumber] && <button className={`film__load-btn ${isSaved && "film__load-btn_hidden"}`}
+                            onClick={handlePushElements}>Ещё
+                    </button>}
                 </div>
             ) : <p>{message}</p>
             }
