@@ -28,6 +28,10 @@ function Movies({isLoader, setIsLoader}) {
             })
     }
 
+    function toggleLikeMovies(movie) {
+        console.log(movie)
+    }
+
     return (
         <>
             <Header/>
@@ -36,7 +40,10 @@ function Movies({isLoader, setIsLoader}) {
                             setResultSearchMessage={setResultSearchMessage}/>
                 <FilterCheckbox title='Короткометражки' storageName="moviesShort" list={movies}
                                 setFilteredMovies={setFilteredMovies}/>
-                {isLoader ? <Preloader/> : (filteredMovies && <MoviesCardList movies={filteredMovies} message={resultSearchMessage} setMessage={setResultSearchMessage}/>)}
+                {isLoader ? <Preloader/> : (filteredMovies &&
+                    <MoviesCardList movies={filteredMovies} message={resultSearchMessage}
+                                    setMessage={setResultSearchMessage}
+                                    toggleSaveMovies={toggleLikeMovies}/>)}
             </section>
             <Footer/>
         </>

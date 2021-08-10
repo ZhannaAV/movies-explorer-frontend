@@ -3,7 +3,7 @@ import './MoviesCardList.css'
 import MoviesCard from "../MoviesCard/MoviesCard";
 import {emptySearchMessage} from "../../utils/constants";
 
-function MoviesCardList({isSaved, movies, message, setMessage}) {
+function MoviesCardList({movies, message, setMessage, toggleSaveMovies}) {
     let [screenWidth, setScreenWidth] = React.useState(document.documentElement.clientWidth)
     const [pul, setPul] = React.useState([0, 0])
     const [currentElementNumber, setCurrentElementNumber] = React.useState(0)
@@ -17,7 +17,6 @@ function MoviesCardList({isSaved, movies, message, setMessage}) {
     // setTimeout(resize, 3000)
 
     React.useEffect(() => {
-        console.log(screenWidth)
         if (screenWidth >= 1280) setPul([4, 3]);
         if (screenWidth >= 990 && screenWidth < 1280) setPul([3, 3]);
         if (screenWidth >= 630 && screenWidth < 990) setPul([2, 4]);
@@ -43,15 +42,14 @@ function MoviesCardList({isSaved, movies, message, setMessage}) {
                 <div className='film'>
                     <ul className='films__list'>
                         {movies.map((item, index) => {
-                           if (index < Math.max(currentElementNumber, (pul[0] * pul[1]))){
-                                return <MoviesCard key={item.id} num={item.id} title={item.nameRU}
-                                                   imageUrl={item.image.url} isSaved={isSaved}/>
+                            if (index < Math.max(currentElementNumber, (pul[0] * pul[1]))) {
+                                return <MoviesCard key={item.id} movie={item} isSaved={true}
+                                                   toggleSaveMovies={toggleSaveMovies}/>
                             }
                         })}
                     </ul>
-                    {movies[currentElementNumber] && <button className={`film__load-btn ${isSaved && "film__load-btn_hidden"}`}
-                            onClick={handlePushElements}>Ещё
-                    </button>}
+                    {movies[currentElementNumber] &&
+                    <button className="film__load-btn" onClick={handlePushElements}>Ещё</button>}
                 </div>
             ) : <p>{message}</p>
             }

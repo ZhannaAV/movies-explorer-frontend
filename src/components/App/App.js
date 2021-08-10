@@ -8,36 +8,41 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 import PageNotFound from "../PageNotFound/PageNotFound";
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import {SignContext} from "../../contexts/SignContext";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
     const [isLoader, setIsLoader] = React.useState(false);
+    const [currentUser, setCurrentUser] = React.useState({email: '', name: ''})
+    const [loggedIn, setLoggedIn] = React.useState(false)//статус авторизации
+
+    console.log(currentUser)
 
     return (
-        <div className="App">
-            <Switch>
-                <Route exact path='/'>
-                    <Main/>
-                </Route>
-                <Route exact path='/signup'>
-                    <Register/>
-                </Route>
-                <Route exact path='/signin'>
-                    <Login/>
-                </Route>
-                <Route exact path='/profile'>
-                    <Profile/>
-                </Route>
-                <Route exact path='/movies'>
-                    <Movies isLoader={isLoader} setIsLoader={setIsLoader}/>
-                </Route>
-                <Route exact path='/saved-movies'>
-                    <SavedMovies/>
-                </Route>
-                <Route path='/*'>
-                    <PageNotFound/>
-                </Route>
-            </Switch>
-        </div>
+        <SignContext.Provider value={{loggedIn, setLoggedIn}}>
+            <CurrentUserContext.Provider value={{currentUser, setCurrentUser}}>
+                <div className="App">
+                    <Switch>
+                        <Route exact path='/'>
+                            <Main/>
+                        </Route>
+                        <Route exact path='/signup'>
+                            <Register/>
+                        </Route>
+                        <Route exact path='/signin'>
+                            <Login/>
+                        </Route>
+                        <ProtectedRoute path='/profile' component={Profile} />
+                        <ProtectedRoute path='/movies' component={Movies} isLoader={isLoader} setIsLoader={setIsLoader}/>
+                        <ProtectedRoute path='/saved-movies' component={SavedMovies} isLoader={isLoader} setIsLoader={setIsLoader}/>
+                        <Route path='/*'>
+                            <PageNotFound/>
+                        </Route>
+                    </Switch>
+                </div>
+            </CurrentUserContext.Provider>
+        </SignContext.Provider>
     );
 }
 
