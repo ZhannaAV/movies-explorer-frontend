@@ -20,10 +20,11 @@ function Login() {
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [isError, setIsError] = React.useState(false)
+    const[validationErrors, setValidationErrors] = React.useState({})
+    const [isValid, setIsValid] = React.useState(false)
 
     function handleLogin(e) {
         e.preventDefault()
-        console.log(email, password)
         mainApi.authorize(email, password)
             .then(res => {
                 localStorage.setItem('token', res.token)
@@ -53,11 +54,11 @@ function Login() {
             <Header/>
             <SignForm title='Рады видеть!' submitBtnText='Войти' linkTo='/signup'
                       text='Ещё не зарегистрированы?' textLink='Регистрация'
-                      handleSubmit={handleLogin} isError={isError}>
+                      handleSubmit={handleLogin} isError={isError} isDisabled={!isValid}>
                 <SignInput id="signup-email" type="email" name="email" label="E-mail"
-                           inputValue={email} setValue={setEmail}/>
+                           inputValue={email} setValue={setEmail} setError={setValidationErrors} isRequired={true} errors={validationErrors} setIsValid={setIsValid}/>
                 <SignInput id="signup-password" type="password" name="password" label="Пароль"
-                           inputValue={password} setValue={setPassword}/>
+                           inputValue={password} setValue={setPassword} setError={setValidationErrors} isRequired={true} errors={validationErrors} setIsValid={setIsValid}/>
             </SignForm>
         </>
     )

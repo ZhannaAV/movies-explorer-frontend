@@ -17,7 +17,6 @@ function SavedMovies({isLoader, setIsLoader}) {
     React.useEffect(() => {
         mainApi.getSavedMovies()
             .then(res => {
-                console.log(res)
                 setSavedMovies(res)
             })
     }, [])
@@ -35,7 +34,6 @@ function SavedMovies({isLoader, setIsLoader}) {
 
 
     function handleRemove(movie) {
-        console.log(movie)
         setSavedMovies(savedMovies.filter(m => m._id !== movie._id))
     }
 

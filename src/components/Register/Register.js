@@ -18,6 +18,9 @@ function Register() {
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [isError, setIsError] = React.useState(false)
+    const [validationErrors, setValidationErrors] = React.useState({})
+    const [isValid, setIsValid] = React.useState(false)
+
 
     function handleRegister(e) {
         e.preventDefault()
@@ -39,13 +42,13 @@ function Register() {
             <Header/>
             <SignForm title='Добро пожаловать!' submitBtnText='Зарегистрироваться'
                       text='Уже зарегистрированы?' textLink='Войти' linkTo='/signin'
-                      handleSubmit={handleRegister} isError={isError}>
+                      handleSubmit={handleRegister} isError={isError} isDisabled={!isValid}>
                 <SignInput id="signup-name" type="text" name="name" label="Имя" inputValue={name}
-                           setValue={setName}/>
+                           setValue={setName} setError={setValidationErrors} minlength="2" maxlength="30" errors={validationErrors} setIsValid={setIsValid}/>
                 <SignInput id="signup-email" type="email" name="email" label="E-mail"
-                           inputValue={email} setValue={setEmail}/>
+                           inputValue={email} setValue={setEmail} setError={setValidationErrors} isRequired={true} errors={validationErrors} setIsValid={setIsValid}/>
                 <SignInput id="signup-password" type="password" name="password" label="Пароль"
-                           inputValue={password} setValue={setPassword}/>
+                           inputValue={password} setValue={setPassword} setError={setValidationErrors} isRequired={true} errors={validationErrors} setIsValid={setIsValid}/>
             </SignForm>
         </>
     )

@@ -36,6 +36,10 @@
 	border: none;
 }
 
+.sign__button:disabled{
+	background-color: #A0A0A0;
+}
+
 .sign__button:hover{
 	opacity: 0.8;
 }
