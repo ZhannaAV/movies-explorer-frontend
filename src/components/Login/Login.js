@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useHistory} from 'react-router-dom';
 import './Login.css'
 import SignForm from "../SignForm/SignForm";
@@ -13,7 +13,7 @@ function Login() {
     const {setLoggedIn} = logContext
 
     const userContext = React.useContext(CurrentUserContext)
-    const {setCurrentUser} = userContext
+    const {setCurrentUser, currentUser} = userContext
 
     const history = useHistory()
 
@@ -41,6 +41,12 @@ function Login() {
                     })
             })
     }
+
+    useEffect(() => {
+        localStorage.setItem('name', currentUser.name)
+        localStorage.setItem('email', currentUser.email)
+    },[currentUser])
+
 
     return (
         <>

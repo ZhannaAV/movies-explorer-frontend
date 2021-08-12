@@ -1,8 +1,9 @@
-import {backUrl} from "./constants";
+import {BACK_URL, MOVIES_URL_IMAGE} from "./constants";
 
 class MainApi {
-    constructor(backUrl) {
+    constructor(backUrl, moviesUrlImage) {
         this._backUrl = backUrl;
+        this._moviesUrlImage = moviesUrlImage;
     }
 
     _checkResponse(res) {
@@ -15,7 +16,7 @@ class MainApi {
 
 //возвращает массив со всеми данными фильмов с сервера
     getSavedMovies() {
-        return fetch(`${this._baseUrl}/movies`, {
+        return fetch(`${this._backUrl}/movies`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('token')}`,
             }
@@ -31,9 +32,8 @@ class MainApi {
                   year,
                   description,
                   image,
-                  trailer,
-                  thumbnail,
-                  movieId,
+                  trailerLink,
+                  id,
                   nameRU,
                   nameEN
               }) {
@@ -49,10 +49,10 @@ class MainApi {
                 duration: duration,
                 year: year,
                 description: description,
-                image: image,
-                trailer: trailer,
-                thumbnail: thumbnail,
-                movieId: movieId,
+                image: `${this._moviesUrlImage}${image.url}`,
+                trailer: trailerLink,
+                thumbnail: `${this._moviesUrlImage}${image.formats.thumbnail.url}`,
+                movieId: id,
                 nameRU: nameRU,
                 nameEN: nameEN,
             })
@@ -128,6 +128,6 @@ class MainApi {
             .then(this._checkResponse);
     }
 }
-    const mainApi = new MainApi(backUrl);
+    const mainApi = new MainApi(BACK_URL, MOVIES_URL_IMAGE);
     export default mainApi
 

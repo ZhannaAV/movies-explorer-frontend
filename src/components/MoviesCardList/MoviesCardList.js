@@ -1,9 +1,9 @@
 import React from "react";
 import './MoviesCardList.css'
 import MoviesCard from "../MoviesCard/MoviesCard";
-import {emptySearchMessage} from "../../utils/constants";
+import {EMPTY_SEARCH_MESSAGE} from "../../utils/constants";
 
-function MoviesCardList({movies, message, setMessage, toggleSaveMovies}) {
+function MoviesCardList({movies, handleRemove, myMovies, message, setMessage}) {
     let [screenWidth, setScreenWidth] = React.useState(document.documentElement.clientWidth)
     const [pul, setPul] = React.useState([0, 0])
     const [currentElementNumber, setCurrentElementNumber] = React.useState(0)
@@ -24,7 +24,7 @@ function MoviesCardList({movies, message, setMessage, toggleSaveMovies}) {
     }, [screenWidth])
 
     React.useEffect(() => {
-        if (!movies.length) setMessage(emptySearchMessage)
+        if (!movies.length) setMessage(EMPTY_SEARCH_MESSAGE)
         setCurrentElementNumber(pul[0] * pul[1])
     }, [movies])
 
@@ -43,8 +43,7 @@ function MoviesCardList({movies, message, setMessage, toggleSaveMovies}) {
                     <ul className='films__list'>
                         {movies.map((item, index) => {
                             if (index < Math.max(currentElementNumber, (pul[0] * pul[1]))) {
-                                return <MoviesCard key={item.id} movie={item} isSaved={true}
-                                                   toggleSaveMovies={toggleSaveMovies}/>
+                                return <MoviesCard key={item.id || item._id} movie={item} myMovies={myMovies} handleRemove={handleRemove}/>
                             }
                         })}
                     </ul>

@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
@@ -15,9 +15,16 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 function App() {
     const [isLoader, setIsLoader] = React.useState(false);
     const [currentUser, setCurrentUser] = React.useState({email: '', name: ''})
-    const [loggedIn, setLoggedIn] = React.useState(false)//статус авторизации
+    const [loggedIn, setLoggedIn] = React.useState(Boolean(localStorage.getItem('token')))//статус авторизации
 
-    console.log(currentUser)
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            const name = localStorage.getItem('name')
+            const email = localStorage.getItem('email')
+            setCurrentUser({email: email, name: name})
+        }
+    }, [])
+
 
     return (
         <SignContext.Provider value={{loggedIn, setLoggedIn}}>
@@ -33,9 +40,11 @@ function App() {
                         <Route exact path='/signin'>
                             <Login/>
                         </Route>
-                        <ProtectedRoute path='/profile' component={Profile} />
-                        <ProtectedRoute path='/movies' component={Movies} isLoader={isLoader} setIsLoader={setIsLoader}/>
-                        <ProtectedRoute path='/saved-movies' component={SavedMovies} isLoader={isLoader} setIsLoader={setIsLoader}/>
+                        <ProtectedRoute path='/profile' component={Profile}/>
+                        <ProtectedRoute path='/movies' component={Movies} isLoader={isLoader}
+                                        setIsLoader={setIsLoader}/>
+                        <ProtectedRoute path='/saved-movies' component={SavedMovies}
+                                        isLoader={isLoader} setIsLoader={setIsLoader}/>
                         <Route path='/*'>
                             <PageNotFound/>
                         </Route>

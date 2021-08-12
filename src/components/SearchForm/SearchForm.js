@@ -1,8 +1,7 @@
 import React from "react";
 import './SearchForm.css'
-import {errorLoadMessage} from "../../utils/constants";
 
-function SearchForm({search, setIsLoader, setResultSearchMessage}) {
+function SearchForm({search}) {
     const [searchPhrase, setSearchPhrase] = React.useState('')
 
     function handleChange(e) {
@@ -11,13 +10,7 @@ function SearchForm({search, setIsLoader, setResultSearchMessage}) {
 
     function handleSubmit(evt) {
         evt.preventDefault()
-        setIsLoader(true)
         search(searchPhrase)
-            .catch(error => {
-                console.log(error)
-                setResultSearchMessage(errorLoadMessage)
-            })
-            .finally(setIsLoader(false))
         setSearchPhrase('')
     }
 

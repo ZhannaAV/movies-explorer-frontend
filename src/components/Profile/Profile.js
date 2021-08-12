@@ -5,7 +5,7 @@ import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import {SignContext} from "../../contexts/SignContext";
 import mainApi from "../../utils/MainApi";
 import {useHistory} from "react-router-dom";
-import {errorDataChangeMessage, sucсessDataChangeMessage} from "../../utils/constants";
+import {ERROR_DATA_CHANGE_MESSAGE, SUCCESS_DATA_SEARCH_MESSAGE} from "../../utils/constants";
 
 function Profile() {
     const userContext = React.useContext(CurrentUserContext)
@@ -28,6 +28,11 @@ function Profile() {
         setIsDisableChange(true)
     }, [currentUser])
 
+    React.useEffect(() => {
+        localStorage.setItem('name', currentUser.name)
+        localStorage.setItem('email', currentUser.email)
+    },[currentUser])
+
 
     function handleChangeName(e) {
         setName(e.target.value)
@@ -44,13 +49,13 @@ function Profile() {
                 setCurrentUser({email: res.email, name: res.name})
                 setName(res.name)
                 setEmail(res.email)
-                setProfileMessage(sucсessDataChangeMessage)
+                setProfileMessage(SUCCESS_DATA_SEARCH_MESSAGE)
             })
             .catch(err => {
                 setName(currentUser.name)
                 setEmail(currentUser.email)
                 setIsDisableChange(true)
-                setProfileMessage(errorDataChangeMessage)
+                setProfileMessage(ERROR_DATA_CHANGE_MESSAGE)
                 console.log(err)
             })
     }

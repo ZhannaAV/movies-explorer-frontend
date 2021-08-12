@@ -7,43 +7,42 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Preloader from "../Preloader/Preloader";
 import moviesApi from "../../utils/MoviesApi";
+import {ERROR_LOAD_MESSAGE} from "../../utils/constants";
 
 function Movies({isLoader, setIsLoader}) {
+    const [movies, setMovies] = React.useState(null)
     const [filteredMovies, setFilteredMovies] = React.useState(null);
     const [resultSearchMessage, setResultSearchMessage] = React.useState('');
-    const [movies, setMovies] = React.useState(null)
-    // console.log(localStorage.getItem('moviesShort'))
-
-
-    // React.useEffect(() => {
-    //     if (localStorage.getItem('moviesShort')) setCheckboxShortFilmAll(localStorage.getItem('moviesShort'))
-    // },[])
 
     function searchMovies(phrase) {
+        setIsLoader(true)
         return moviesApi.getMovies()
             .then(res => {
                 setMovies(res.filter(item => {
                     return item.nameRU.includes(phrase)
                 }))
             })
+            .catch(error => {
+                console.log(error)
+                setResultSearchMessage(ERROR_LOAD_MESSAGE)
+            })
     }
 
-    function toggleLikeMovies(movie) {
-        console.log(movie)
-    }
+    React.useEffect(() => {
+        setIsLoader(false)
+    }, [filteredMovies])
+
 
     return (
         <>
             <Header/>
             <section className='movies'>
-                <SearchForm search={searchMovies} setIsLoader={setIsLoader}
-                            setResultSearchMessage={setResultSearchMessage}/>
-                <FilterCheckbox title='Короткометражки' storageName="moviesShort" list={movies}
+                <SearchForm search={searchMovies}/>
+                <FilterCheckbox title='Короткометражки' list={movies}
                                 setFilteredMovies={setFilteredMovies}/>
                 {isLoader ? <Preloader/> : (filteredMovies &&
                     <MoviesCardList movies={filteredMovies} message={resultSearchMessage}
-                                    setMessage={setResultSearchMessage}
-                                    toggleSaveMovies={toggleLikeMovies}/>)}
+                                    setMessage={setResultSearchMessage}/>)}
             </section>
             <Footer/>
         </>
