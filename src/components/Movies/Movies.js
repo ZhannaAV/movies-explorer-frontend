@@ -9,7 +9,8 @@ import Preloader from "../Preloader/Preloader";
 import moviesApi from "../../utils/MoviesApi";
 import {ERROR_LOAD_MESSAGE} from "../../utils/constants";
 
-function Movies({isLoader, setIsLoader}) {
+function Movies() {
+    const [isLoader, setIsLoader] = React.useState(false);
     const [movies, setMovies] = React.useState(null)
     const [filteredMovies, setFilteredMovies] = React.useState(null);
     const [resultSearchMessage, setResultSearchMessage] = React.useState('');

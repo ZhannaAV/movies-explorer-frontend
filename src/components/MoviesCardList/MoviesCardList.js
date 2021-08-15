@@ -4,7 +4,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import {EMPTY_SEARCH_MESSAGE} from "../../utils/constants";
 
 function MoviesCardList({movies, handleRemove, myMovies, message, setMessage}) {
-    let [screenWidth, setScreenWidth] = React.useState(document.documentElement.clientWidth)
+    const [screenWidth, setScreenWidth] = React.useState(document.documentElement.clientWidth)
     const [pul, setPul] = React.useState([0, 0])
     const [currentElementNumber, setCurrentElementNumber] = React.useState(0)
 

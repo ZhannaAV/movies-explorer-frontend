@@ -1,65 +1,46 @@
-import React, {useEffect} from "react";
-import {useHistory} from 'react-router-dom';
+import React from "react";
 import './Login.css'
 import SignForm from "../SignForm/SignForm";
 import Header from "../Header/Header";
 import SignInput from "../SignInput/SignInput";
-import {SignContext} from "../../contexts/SignContext";
-import {CurrentUserContext} from "../../contexts/CurrentUserContext";
-import mainApi from "../../utils/MainApi";
+import Preloader from "../Preloader/Preloader";
 
-function Login() {
-    const logContext = React.useContext(SignContext)
-    const {setLoggedIn} = logContext
+function Login({onLogin}) {
 
-    const userContext = React.useContext(CurrentUserContext)
-    const {setCurrentUser, currentUser} = userContext
-
-    const history = useHistory()
-
+    const [isLoader, setIsLoader] = React.useState(false);
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [isError, setIsError] = React.useState(false)
-    const[validationErrors, setValidationErrors] = React.useState({})
+    const [validationErrors, setValidationErrors] = React.useState({})
     const [isValid, setIsValid] = React.useState(false)
 
     function handleLogin(e) {
         e.preventDefault()
-        mainApi.authorize(email, password)
-            .then(res => {
-                localStorage.setItem('token', res.token)
-                mainApi.getMe()
-                    .then(res => {
-                        console.log(res)
-                        setLoggedIn(true)
-                        setCurrentUser({email: res.email, name: res.name})
-                        setIsError(false)
-                        history.push("/movies")
-                    })
-                    .catch(err => {
-                        console.log(err)
-                        setIsError(true)
-                    })
+        setIsLoader(true)
+        onLogin(email, password)
+            .catch(err => {
+                console.log(err)
+                setIsError(true)
             })
+            .finally(() => setIsLoader(false))
     }
-
-    useEffect(() => {
-        localStorage.setItem('name', currentUser.name)
-        localStorage.setItem('email', currentUser.email)
-    },[currentUser])
-
 
     return (
         <>
             <Header/>
-            <SignForm title='Рады видеть!' submitBtnText='Войти' linkTo='/signup'
-                      text='Ещё не зарегистрированы?' textLink='Регистрация'
-                      handleSubmit={handleLogin} isError={isError} isDisabled={!isValid}>
-                <SignInput id="signup-email" type="email" name="email" label="E-mail"
-                           inputValue={email} setValue={setEmail} setError={setValidationErrors} isRequired={true} errors={validationErrors} setIsValid={setIsValid}/>
-                <SignInput id="signup-password" type="password" name="password" label="Пароль"
-                           inputValue={password} setValue={setPassword} setError={setValidationErrors} isRequired={true} errors={validationErrors} setIsValid={setIsValid}/>
-            </SignForm>
+            {isLoader ? <Preloader/> : (
+                <SignForm title='Рады видеть!' submitBtnText='Войти' linkTo='/signup'
+                          text='Ещё не зарегистрированы?' textLink='Регистрация'
+                          handleSubmit={handleLogin} isError={isError} isDisabled={!isValid}>
+                    <SignInput id="signup-email" type="email" name="email" label="E-mail"
+                               inputValue={email} setValue={setEmail} setError={setValidationErrors}
+                               isRequired={true} errors={validationErrors} setIsValid={setIsValid}/>
+                    <SignInput id="signup-password" type="password" name="password" label="Пароль"
+                               inputValue={password} setValue={setPassword}
+                               setError={setValidationErrors} isRequired={true}
+                               errors={validationErrors} setIsValid={setIsValid}/>
+                </SignForm>
+            )}
         </>
     )
 }

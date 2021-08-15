@@ -8,7 +8,8 @@ import Footer from "../Footer/Footer";
 import mainApi from "../../utils/MainApi";
 import Preloader from "../Preloader/Preloader";
 
-function SavedMovies({isLoader, setIsLoader}) {
+function SavedMovies() {
+    const [isLoader, setIsLoader] = React.useState(false);
     const [savedMovies, setSavedMovies] = React.useState(null)
     const [findedMovies, setFindedMovies] = React.useState(null)
     const [filteredSavedMovies, setFilteredSavedMovies] = React.useState(null);
