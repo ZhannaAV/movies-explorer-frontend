@@ -1,15 +1,21 @@
 import './Navigation.css'
 import React from "react";
 import {Link, NavLink, useLocation} from "react-router-dom";
+import {SignContext} from "../../contexts/SignContext";
+
 
 function Navigation() {
+    const logContext = React.useContext(SignContext)
+    const {loggedIn} = logContext
+
+
     const [isBurgerOpen, setBurgerOpen] = React.useState(false)
     const {pathname} = useLocation()
-    const whiteList = ['/profile', '/movies', '/saved-movies']
+    const whiteList = ['/profile', '/movies', '/saved-movies', '/']
 
     return (
         <>
-            {pathname === '/' && (
+            {pathname === '/' && !loggedIn && (
                 <nav className="navigation">
                     <Link/>
                     <Link className='navigation__link-signup' to='/signup'>
@@ -22,7 +28,7 @@ function Navigation() {
                     </Link>
                 </nav>
             )}
-            {whiteList.some((i) => i === pathname) && (
+            {whiteList.some((i) => i === pathname) && loggedIn && (
                 <>
                     <nav className="navigation navigation_hidden">
                         <NavLink
