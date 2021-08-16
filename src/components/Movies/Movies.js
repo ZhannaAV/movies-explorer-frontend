@@ -6,31 +6,29 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Preloader from "../Preloader/Preloader";
-import moviesApi from "../../utils/MoviesApi";
 import {ERROR_LOAD_MESSAGE} from "../../utils/constants";
 
-function Movies() {
+function Movies({allMovies}) {
     const [isLoader, setIsLoader] = React.useState(false);
     const [movies, setMovies] = React.useState(null)
-    const [filteredMovies, setFilteredMovies] = React.useState(null);
+    const [filteredMovies, setFilteredMovies] = React.useState(JSON.parse(localStorage.getItem('movies')));
     const [resultSearchMessage, setResultSearchMessage] = React.useState('');
 
     function searchMovies(phrase) {
         setIsLoader(true)
-        return moviesApi.getMovies()
-            .then(res => {
-                setMovies(res.filter(item => {
-                    return item.nameRU.includes(phrase)
-                }))
-            })
-            .catch(error => {
-                console.log(error)
-                setResultSearchMessage(ERROR_LOAD_MESSAGE)
-            })
+        const arr = allMovies.filter(item => {
+            return item.nameRU.includes(phrase)
+        })
+        if (arr.length) {
+            setMovies(arr)
+        } else {
+            setResultSearchMessage(ERROR_LOAD_MESSAGE)
+        }
     }
 
     React.useEffect(() => {
         setIsLoader(false)
+        localStorage.setItem('movies', JSON.stringify(filteredMovies))
     }, [filteredMovies])
 
 
@@ -39,7 +37,7 @@ function Movies() {
             <Header/>
             <section className='movies'>
                 <SearchForm search={searchMovies}/>
-                <FilterCheckbox title='Короткометражки' list={movies}
+                <FilterCheckbox title='Короткометражки' list={movies} checkboxLocalStorageName="checkboxSavedMovie"
                                 setFilteredMovies={setFilteredMovies}/>
                 {isLoader ? <Preloader/> : (filteredMovies &&
                     <MoviesCardList movies={filteredMovies} message={resultSearchMessage}

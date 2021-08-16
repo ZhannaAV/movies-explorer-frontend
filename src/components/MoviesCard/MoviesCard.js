@@ -4,18 +4,9 @@ import './MoviesCard.css'
 import {MOVIES_URL_IMAGE} from "../../utils/constants";
 import mainApi from "../../utils/MainApi";
 
-function MoviesCard({movie, handleRemove}) {
+function MoviesCard({movie, myMovies, setMyMovies, handleRemove}) {
     const {pathname} = useLocation()
     const [savedID, setSavedID] = React.useState(movie._id || null)
-    const [myMovies, setMyMovies] = React.useState([])
-
-    // генерит массив сохраненных фильмов для определения состояния кнопки
-    React.useEffect(() => {
-        mainApi.getSavedMovies()
-            .then(res => {
-                setMyMovies(res)
-            })
-    }, [])
 
 
     React.useEffect(() => {
@@ -29,6 +20,7 @@ function MoviesCard({movie, handleRemove}) {
             setSavedID(movie._id)
         }
     }, [myMovies])
+
 
     React.useEffect(() => {
         if (pathname === '/movies') {
@@ -66,15 +58,16 @@ function MoviesCard({movie, handleRemove}) {
         setMyMovies(myMovies.filter(m => m._id !== savedID))
     }
 
-
     return (
         <>
             {(pathname === '/saved-movies' && !savedID) ? '' : (
                 <li className="film__card">
+                    <a href={movie.trailerLink}  target="_blank">
                     <img
                         src={pathname === '/movies' ? `${MOVIES_URL_IMAGE}${movie.image.url}` : movie.image}
                         className="film__img"
                         alt="обложка фильма"/>
+                    </a>
                     <div className="film__info">
                         <h3 className="film__title">{movie.nameRU}</h3>
 

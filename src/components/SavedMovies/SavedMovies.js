@@ -12,7 +12,7 @@ function SavedMovies() {
     const [isLoader, setIsLoader] = React.useState(false);
     const [savedMovies, setSavedMovies] = React.useState(null)
     const [findedMovies, setFindedMovies] = React.useState(null)
-    const [filteredSavedMovies, setFilteredSavedMovies] = React.useState(null);
+    const [filteredSavedMovies, setFilteredSavedMovies] = React.useState(JSON.parse(localStorage.getItem('savedMovies')));
     const [resultSearchMessage, setResultSearchMessage] = React.useState('');
 
     React.useEffect(() => {
@@ -21,6 +21,10 @@ function SavedMovies() {
                 setSavedMovies(res)
             })
     }, [])
+
+    React.useEffect(() => {
+        setFindedMovies(savedMovies)
+    }, [savedMovies])
 
     function searchSavedMovies(phrase) {
         setIsLoader(true)
@@ -31,6 +35,9 @@ function SavedMovies() {
 
     React.useEffect(() => {
         setIsLoader(false)
+        localStorage.setItem('savedMovies', JSON.stringify(filteredSavedMovies))
+        console.log(JSON.parse(localStorage.getItem('savedMovies')))
+
     }, [filteredSavedMovies])
 
 
@@ -43,7 +50,7 @@ function SavedMovies() {
             <Header/>
             <section className='saved-movies'>
                 <SearchForm search={searchSavedMovies}/>
-                <FilterCheckbox title='Короткометражки' list={findedMovies}
+                <FilterCheckbox title='Короткометражки' list={findedMovies} checkboxLocalStorageName="checkboxMovie"
                                 setFilteredMovies={setFilteredSavedMovies}/>
                 {isLoader ? <Preloader/> : (filteredSavedMovies &&
                     <MoviesCardList movies={filteredSavedMovies || []} message={resultSearchMessage}

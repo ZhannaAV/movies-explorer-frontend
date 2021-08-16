@@ -13,10 +13,12 @@ import {SignContext} from "../../contexts/SignContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import ProtectedRouteAfterSign from "../ProtectedRouteAfterSign/ProtectedRouteAfterSign";
 import mainApi from "../../utils/MainApi";
+import moviesApi from "../../utils/MoviesApi";
 
 function App() {
     const [currentUser, setCurrentUser] = React.useState({email: '', name: ''})
     const [loggedIn, setLoggedIn] = React.useState(Boolean(localStorage.getItem('token')))//статус авторизации
+    const [allMovies, setAllMovies] = React.useState(null)
 
     const history = useHistory()
 
@@ -36,19 +38,21 @@ function App() {
     }, [])
 
     useEffect(() => {
-        localStorage.setItem('name', currentUser.name)
-        localStorage.setItem('email', currentUser.email)
-    }, [currentUser])
+        moviesApi.getMovies()
+            .then(res => setAllMovies(res))
+            .catch(err => console.log(err))
+    }, [])
+
 
     function register(name, email, password) {
-      return mainApi.register(name,email,password)
+        return mainApi.register(name, email, password)
             .then(() => {
-               return login(email,password)
+                return login(email, password)
             })
     }
 
     function login(email, password) {
-     return mainApi.authorize(email, password)
+        return mainApi.authorize(email, password)
             .then(res => {
                 localStorage.setItem('token', res.token)
                 mainApi.getMe()
@@ -60,7 +64,7 @@ function App() {
             })
     }
 
-    function updateUser(name, email){
+    function updateUser(name, email) {
         return mainApi.changeInfoProfile(name, email)
             .then(res => setCurrentUser({email: res.email, name: res.name}))
     }
@@ -70,6 +74,11 @@ function App() {
         setLoggedIn(false)
         setCurrentUser({email: '', name: ''})
         localStorage.setItem('token', '');
+        localStorage.setItem('movies', '');
+        localStorage.setItem('savedMovies', '');
+        localStorage.setItem('checkboxMovie', '')
+        localStorage.setItem('checkboxSavedMovie', '')
+
         history.push("/")
     }
 
@@ -82,10 +91,12 @@ function App() {
                         <Route exact path='/'>
                             <Main/>
                         </Route>
-                        <ProtectedRouteAfterSign path='/signup' component={Register} onRegister={register}/>
+                        <ProtectedRouteAfterSign path='/signup' component={Register}
+                                                 onRegister={register}/>
                         <ProtectedRouteAfterSign path='/signin' component={Login} onLogin={login}/>
-                        <ProtectedRoute path='/profile' component={Profile} onSignOut={handleSignOut} onUpdateUser={updateUser}/>
-                        <ProtectedRoute path='/movies' component={Movies}/>
+                        <ProtectedRoute path='/profile' component={Profile}
+                                        onSignOut={handleSignOut} onUpdateUser={updateUser}/>
+                        <ProtectedRoute path='/movies' component={Movies} allMovies={allMovies}/>
                         <ProtectedRoute path='/saved-movies' component={SavedMovies}/>
                         <Route path='/*'>
                             <PageNotFound/>

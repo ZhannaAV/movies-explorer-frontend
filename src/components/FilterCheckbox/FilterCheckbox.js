@@ -1,12 +1,13 @@
 import React from "react";
 import './FilterCheckbox.css'
+import {shortMovieLenght} from "../../utils/constants";
 
-function FilterCheckbox({title, setFilteredMovies, list}) {
-    const [isFilterOn, setFilter] = React.useState( false)
+function FilterCheckbox({title, setFilteredMovies, list, checkboxLocalStorageName}) {
+    const [isFilterOn, setFilter] = React.useState( JSON.parse(localStorage.getItem(`${checkboxLocalStorageName}`)))
 
     function applyFilter(list) {
         setFilteredMovies(list.filter(item => {
-            return item.duration <= 40
+            return item.duration <= shortMovieLenght
         }))
     }
 
@@ -26,6 +27,7 @@ function FilterCheckbox({title, setFilteredMovies, list}) {
         if(list) {
             isFilterOn ? applyFilter(list) : cancelFilter(list)
         }
+        localStorage.setItem(`${checkboxLocalStorageName}`, JSON.stringify(isFilterOn))
     }, [isFilterOn])
 
     return (

@@ -1,12 +1,16 @@
 import React from "react";
 import './MoviesCardList.css'
 import MoviesCard from "../MoviesCard/MoviesCard";
-import {EMPTY_SEARCH_MESSAGE} from "../../utils/constants";
+import {EMPTY_SEARCH_MESSAGE, LARGE_DESKTOP_SCREEN_POINT, MEDIUM_DESKTOP_SCREEN_POINT, MOBILE_DESKTOP_SCREEN_POINT, EXTRA_LARGE_DESKTOP_TABLE, LARGE_DESKTOP_TABLE, MOBILE_DESKTOP_TABLE, MEDIUM_DESKTOP_TABLE} from "../../utils/constants";
+import mainApi from "../../utils/MainApi";
 
-function MoviesCardList({movies, handleRemove, myMovies, message, setMessage}) {
+
+function MoviesCardList({movies, handleRemove, message, setMessage}) {
     const [screenWidth, setScreenWidth] = React.useState(document.documentElement.clientWidth)
     const [pul, setPul] = React.useState([0, 0])
     const [currentElementNumber, setCurrentElementNumber] = React.useState(0)
+
+    const [myMovies, setMyMovies] = React.useState([])
 
     window.addEventListener('resize', resize)
 
@@ -14,13 +18,11 @@ function MoviesCardList({movies, handleRemove, myMovies, message, setMessage}) {
         setScreenWidth(document.documentElement.clientWidth)
     }
 
-    // setTimeout(resize, 3000)
-
     React.useEffect(() => {
-        if (screenWidth >= 1280) setPul([4, 3]);
-        if (screenWidth >= 990 && screenWidth < 1280) setPul([3, 3]);
-        if (screenWidth >= 630 && screenWidth < 990) setPul([2, 4]);
-        if (screenWidth < 630) setPul([5, 1]);
+        if (screenWidth >= LARGE_DESKTOP_SCREEN_POINT) setPul(EXTRA_LARGE_DESKTOP_TABLE);
+        if (screenWidth >= MEDIUM_DESKTOP_SCREEN_POINT && screenWidth < LARGE_DESKTOP_SCREEN_POINT) setPul(LARGE_DESKTOP_TABLE);
+        if (screenWidth >= MOBILE_DESKTOP_SCREEN_POINT && screenWidth < MEDIUM_DESKTOP_SCREEN_POINT) setPul(MEDIUM_DESKTOP_TABLE);
+        if (screenWidth < MOBILE_DESKTOP_SCREEN_POINT) setPul(MOBILE_DESKTOP_TABLE);
     }, [screenWidth])
 
     React.useEffect(() => {
@@ -36,6 +38,14 @@ function MoviesCardList({movies, handleRemove, myMovies, message, setMessage}) {
         setCurrentElementNumber(currentElementNumber + pul[0])
     }
 
+    // генерит массив сохраненных фильмов для определения состояния кнопки
+    React.useEffect(() => {
+        mainApi.getSavedMovies()
+            .then(res => {
+                setMyMovies(res)
+            })
+    }, [])
+
     return (
         <>
             {movies.length ? (
@@ -43,7 +53,7 @@ function MoviesCardList({movies, handleRemove, myMovies, message, setMessage}) {
                     <ul className='films__list'>
                         {movies.map((item, index) => {
                             if (index < Math.max(currentElementNumber, (pul[0] * pul[1]))) {
-                                return <MoviesCard key={item.id || item._id} movie={item} myMovies={myMovies} handleRemove={handleRemove}/>
+                                return <MoviesCard key={item.id || item._id} movie={item} myMovies={myMovies} setMyMovies={setMyMovies} handleRemove={handleRemove}/>
                             }
                         })}
                     </ul>
